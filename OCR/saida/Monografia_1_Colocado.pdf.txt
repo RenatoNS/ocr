@@ -1,0 +1,1802 @@
+Identificacao de Produtos em Descricoes Textuais de Compras:
+Uma Proposta para Portais de Transparéncia Publica
+
+Resumo. Os portais de transparéncia vém se constituindo em importantes canais de
+comunicagao entre o governo e a sociedade. No entanto, nem sempre o formato das
+informacoes apresentadas é o mais apropriado. Por exemplo, as descrigdes de compras
+em formato de texto dificultam a andlise dessas compras para a identificacdo do produto
+adquirido, e a posterior comparagao entre as compras. O grande volume de dados
+inviabiliza uma identificacdo manual. Dessa forma, o objetivo desse trabalho é
+identificar automaticamente os produtos que sao especificados de forma textual nas
+descrigdes de compras. Para isso, é€ proposto um processo de descoberta de
+conhecimento em dados textuais capaz de gerar regras que possibilitam a identificagao
+de produtos a partir das descricoes textuais de compras.
+
+Palavras-chave: transparéncia publica, mineracdo de texto, tratamento de dados,
+processamento intensivo de dados, big data
+
+Abstract. Transparency portals are becoming an important communication channel
+between government and society. However, the format of the information made available
+in these portals is not always the most appropriate. For example, descriptions of
+purchases in text format make it more difficult to analyze these purchases and later
+compare them with other purchases. Due to the large volume of data, manual
+identification is unfeasible. Thus, the objective of this work is to automatically identify
+products which are specified in text form in descriptions of purchases. For this purpose,
+a knowledge discovery process for text data is proposed which can generate rules
+enabling the identification of products based on text descriptions of purchases.
+
+Keywords: public transparency, text mining, data processing, intensive data processing, big
+data.
+
+1. INTRODUGAO
+
+Com o avanco da Internet e das tecnologias digitais, questoes de transparéncia eletrdnica,
+democracia digital, governo aberto, ciberdemocracia e outros termos que associam a atuac¢ao
+governamental as ferramentas apoiadas pelo uso de Tecnologia da Informa¢ao vém ganhando cada
+vez mais importancia para a sociedade. Os ecossistemas digitais sao ambientes que estimulam a
+participacao cidada e consequentemente aumentam o grau de democratiza¢ao dos governos.
+
+Acompanhando essa tendéncia, a area de transparéncia tem encontrado um terreno fértil
+para promover o estimulo ao controle social dos gastos publicos. Os portais de transparéncia
+publica vém se transformando em importantes canais de comunicac¢éo entre 0 governo e a
+sociedade. Por meio desses portais, 0 cidadao tem acesso a uma série de informac¢oes que facilitam
+o acompanhamento e o controle das atividades governamentais.
+
+Visando atender a crescente demanda por informac¢oes publicas, 0 governo brasileiro tem
+se empenhado para disponibilizar seus dados, tendo inclusive criado legislagdes especificas, LeiComplementar 131(BRASIL, 2009), para garantir a disponibilizacao de dados governamentais.
+Porem, a simples disponibilizagao de dados na Internet nao garante 0 aumento do grau de
+transparéncia governamental. Isso acontece porque a maioria dos dados disponibilizados para o
+cidadao nao foram concebidos com esse proposito. Em geral, as informagodes sao oriundas de
+sistemas coorporativos cujo objetivo é propiciar o controle administrativo das contas publicas e
+por isso nem sempre o seu formato € 0 mais apropriado para o cidadao entender o que realmente
+elas representam.
+
+Dentre essas informacdes nao tratadas, estado as descrigdes de compras feitas pela
+Administragao Publica. Os produtos comprados sao descritos em formato textual de livre
+preenchimento, o que inviabiliza a comparacao entre as compras similares e prejudica o
+acompanhamento sistematico dos gastos.
+
+Outro agravante nesse contexto ¢ o elevado volume de dados disponibilizados diariamente
+por esses sites. Apesar da grande quantidade de informacdes apresentadas permitir uma maior
+abrangéncia e mais insumo para que o cidadao possa acompanhar a atuagao governamental, a falta
+de mecanismos de classificag¢ao e organizacao dessas informacoes (com relacgao a importancia
+desses gastos) acaba fazendo com que dados relevantes fiquem escondidos no grande volume de
+informac¢oes disponibilizadas, dificultando 0 entendimento, a comparac¢ao e reuso desses dados.
+
+Assim, a questao de pesquisa que esse trabalho aborda ¢: como identificar de forma
+automatizada os produtos a partir das especifica¢des textuais que sao usadas para caracteriza-los
+nas descricgdes dos gastos que sao apresentados nos portais de transparéncia publica?
+
+Logo, o objetivo dessa monografia ¢ fazer a identificagao dos produtos mais comprados
+pela Administra¢ao Publica, por meio da analise das descri¢oes textuais de compras, apresentadas
+nos portais de transparéncia. Sendo assim, o problema a ser tratado consiste em identificar de
+forma automatizada os produtos a partir das especificagdes textuais que sao usadas para
+caracteriza-los nas descric6es dos gastos que sao apresentados nos portais de transparéncia publica.
+
+Para isso, considerando-se uma frase como sendo uma sequéncia de tokens! continuos e
+partindo-se da premissa de que descric6ées de produtos similares apresentam alguma sequéncia de
+tokens iguais, considerou-se a seguinte hipotese: “se forem identificadas as sequéncias de tokens
+que mais se repetem em um determinado conjunto de descri¢ao de compras, entao, essas
+sequéncias de tokens caracterizarao os produtos mais comprados desse conjunto de descricdes”’.
+
+Optou-se pela caracterizacao apenas dos produtos mais comprados devido a grande
+quantidade de diferentes produtos que a Administragao Publica pode adquirir (centenas de
+milhares), visto que, quanto mais comprado for um determinado produto, mais informa¢oes de
+compras se tem desse produto, tornando-se mais facil identificar-se padrdes de compras e
+consequentemente possiveis fraudes. Logo, esse trabalho pretende criar regras de identificagao
+para os produtos mais comprados, otimizando assim o esfor¢o de identifica¢ao de tais produtos.
+
+Para a avaliacao, desenvolveu-se uma metodologia capaz de analisar os resultados obtidos
+pela aplica¢ao da soluc¢ao proposta, sendo que, essa metodologia de avaliacao permite verificar a
+qualidade dos resultados obtidos pelos diversos experimentos executados durante 0 processo de
+validacao.
+
+Dessa forma, essa monografia apresenta como contribui¢ao principal a proposta de um
+método capaz de gerar regras de identificagao de produtos a partir de descri¢des textuais de
+compras, porém, outras contribuigdes intermediarias também resultam dessa pesquisa, como a
+
+' Em mineracao de texto, define-se token como sendo a unidade minima de um texto. No contexto dessa
+monografia, considera-se token como sendo sinénimo de palavra.proposta de um algoritmo de geracao de frases, de um algoritmo de poda de sub frases e o
+desenvolvimento de uma metodologia de avalia¢cao dos resultados.
+
+O restante desse trabalho esta organizado da seguinte forma: A Secao 2 faz uma revisao de alguns
+trabalhos relacionados e as Secdes 3 e 4 apresentam a proposta e a validacao dessa proposta
+respectivamente. Na Secao 5 sao apresentadas algumas possiveis aplicacgdes para o método desenvolvido.
+Finalmente, na Se¢ao 6 é feita a conclusao do artigo.
+
+2. TRABALHOS RELACIONADOS
+
+Estudando-se a literatura relacionada a portais de transparéncia publica, Hong (2014) faz
+uma analise de portais de governo aberto, na perspectiva da transparéncia para accountability. Este
+estudo tem como objetivo avaliar se a atual estrutura e organizacao de alguns dos portais de
+governo aberto é adequada para apoiar a transparéncia na presta¢ao de contas. Sendo assim, Hong
+(2014) estabelece um conjyunto de requisitos como base de caracteristicas-chave da divulgacao de
+dados sobre governo aberto e avaliacao de transparéncia. Os resultados dos estudos sugeriram que
+este tipo de portal nao possui elementos organizacionais necessarios para apoiar plenamente os
+cidadaos comuns envolvidos em esfor¢os de responsabilizagao publica. No entanto, a criacao
+desses elementos organizacionais muitas vezes passa pela necessidade de estruturacao de dados
+que estao originalmente expressos em formato de texto.
+
+Atualmente, ja existe uma série de trabalhos que se propdem a extrair informa¢oes
+relevantes de dados textuais gerados pela Administracao Publica. Nesse sentido, CARVALHO et
+al. (2013) e CARVALHO et al. (2014b) sugerem uma metodologia para a formula¢gao de um banco
+de preco da Administracgao Publica Federal Brasileira a partir dos dados de compras que sao
+apresentados no Portal da Transparéncia do Governo Federal Brasileiro. Essas compras vém
+descritas em formato textual e carecem do emprego de técnicas de mineracao de texto para se
+extrair o produto correspondente a cada uma das descrigdes de compras.
+
+A abordagem proposta esta dividida em 6 passos. Primeiro, sao selecionadas, do banco de
+dados do portal, todas as notas de empenho referentes a um determinado periodo. Depois, para
+cada uma dessas notas de empenho sao recuperados os codigos de material das compras descritas.
+O passo seguinte é a filtragem do conjunto de dados referente a um codigo de material especifico.
+No quarto passo, utiliza-se esses resultados da filtragem e emprega-se um novo filtro, baseado na
+utilizacao de palavras chave, a fim de se determinar um produto especifico. Posteriormente, filtrase o conjunto de dados resultante por faixa de precos, e finalmente calcula-se 0 preco de referéncia
+para o produto em questao.
+
+O primeiro e 0 segundo passo sao executados com o auxilio de uma ferramenta de ETL
+(Extract, Transform, Load). O terceiro passo (a filtragem pelo codigo de material) é executado
+através de consultas SQL (Structured Query Language), diretamente no banco de dados. Na
+filtragem por palavras chaves (quarto passo), especialistas definem quais palavras devem estar
+contidas e quais palavras nao podem estar presentes na descricao de uma determinada compra,
+para que um determinado produto possa ser caracterizado. Isso permite a identificagao dos
+produtos.
+
+No entanto, mesmo apos a caracteriza¢ao do produto, ainda ha uma grande variabilidade
+na faixa de preco paga. Essas diferencas, em muitas situagdes decorrem das diferentes formas de
+se quantificar um produto (por exemplo, diferentes unidades de medidas). Sendo assim, durante o
+passo 5 sao aplicadas técnicas de clusterizag¢ao, para cada grupo de produtos identificados,
+considerando-se que produtos quantificados de forma igual ficam em um mesmo cluster. Ainda
+nesse passo, os especialistas definem rotulos para cada um dos clusters gerados, sendo que umproduto sera totalmente caracterizado a partir da combina¢ao entre o nome do produto
+(identificado a partir da combina¢ao de palavras chaves) com o rotulo definido pelos especialistas.
+Esses rotulos sao escolhidos em uma lista que traz as palavras com maior probabilidade de definir
+um determinado cluster. Finalmente, apos a qualificagao dos produtos, utiliza-se os precos pagos
+por tais produtos a fim de se calcular uma faixa de preco de referéncia para esse produto. Nessa
+abordagem, especialistas precisam definir qual conjyunto de palavras deve ser utilizado para
+caracterizar cada um dos produtos definidos como identificaveis. A definigao de quais produtos
+irao compor o banco de precos também €é feita pelos especialistas.
+
+CARVALHO et al. (2014a) usam redes bayesianas (Friedman, Geiger, & Goldszmidt,
+1997) para identificar e prevenir o fracionamento de compras, uma espécie de fraude utilizada para
+burlar 0 processo licitatorio exigido por lei. No Brasil, compras inferiores a um determinado valor
+(R$ 8.000,00) sao dispensadas do procedimento licitatorio. No entanto, uma fraude comum, para
+enquadrar compras de valores superiores nesse tipo de dispensa é 0 fracionamento de uma mesma
+compra em varias outras de valores inferiores ao limite definido por lei. O objetivo principal desse
+trabalho ¢ tentar identificar as compras consideradas suspeitas de terem sido fracionadas, a fim de
+permitir que providencias possam ser tomadas antes da consumacao de um gasto irregular.
+
+Essa identificagao de compras suspeitas ¢ feita através do uso de redes bayesianas e utiliza
+uma série de atributos estruturados durante o processo de classifica¢gao. No entanto, também se faz
+necessaria a identificacgao dos produtos que estao sendo especificados de forma textual nos editais
+de compra.
+
+MARZAGAO (2015) apresenta uma outra abordagem para o problema de identificac4o de
+produtos e servicos que sao adquiridos pela Administracgao Publica. Esse trabalho utiliza um
+cadastro de materiais e servicos adotados pelo Governo Federal Brasileiro no sistema SIASG
+(Sistema Integrado de Administrag¢ao de Servi¢gos Gerais) como dado de treinamento, e a partir
+deste cadastro, tenta classificar as compras utilizando o algoritmo de Maquina de Vetor de Suporte
+(CORTES; VAPNIK, 1995). Essa abordagem atingiu uma acuracia de 83,35%, e segundo o autor
+os erros encontrados foram ocasionados por duas causas principais: falhas no conjunto de dados
+de tretnamento e problemas de frequéncia de classes, pois algumas classes de produtos, por nao
+serem compradas frequentemente, nao forneciam informacoes suficiente para o algoritmo de
+aprendizado de maquinas.
+
+Visando atender a necessidade de processamento requerida pelo grande volume de
+informa¢des que compoe as bases de dados de compras governamentais, PAIVA e REVOREDO
+(2016) apresentaram uma solu¢ao escalavel para o problema de identificagao de produtos em
+descrigdes textuais de compras. PAIVA e REVOREDO (2016) propuseram um modelo de
+identificagao de produtos baseado em palavras chaves, semelhante ao processo utilizado em
+(CARVALHO et al., 2013) e (CARVALHO et al., 2014a). No entanto, na abordagem sugerida em
+(PAIVA e REVOREDO; 2016), ao invés de se empregar ferramentas de ETL e processamento
+sequencial, fo1 desenvolvido uma arquitetura que possibilita o processamento paralelo, resolvendo
+questoes ligadas a limitagdes na capacidade de processamento.
+
+O foco principal desse trabalho foi a proposta de uma arquitetura de processamento
+baseado no paradigma de programacao MapReduce (DEAN; GHEMAWAT, 2008) e no
+framework hadoop (WHITE, 2012), que roda em clusters de computadores. Dessa forma,
+aumentos expressivos na quantidade de registros textuais a serem analisados e identificados podem
+ser compensados pela inclusao de novos computadores ao cluster utilizado.
+
+Saindo do contexto da Administracao Publica, mas ainda dentro do desafio de se extrair
+informa¢oes de dados textuais, algumas iniciativas tem se destacado no sentido de utilizar omodelo de Bag of Phrases”, em um contraponto ao tradicional Bag of Words (Salton, Wong, &
+Yang, 1975). Dentre essas iniciativas estao (REN et al., 2015), (LIU et al., 2015) e (EL-KISHKY
+et al., 2014). Essas abordagens, ao invés de trabalharem com os tokens de forma individualizada,
+consideram sequéncias de tokens, que formam frases, a fim de agregar mais expressividades as
+variaveis tratadas.
+
+Pela analise dos trabalhos relacionados, verificou-se que esses apresentavam algumas
+limitacgoes, dentre as quais pode-se destacar: a necessidade de utilizag¢ao de um conjunto de dados
+de treinamento, 0 que normalmente nao esta disponivel, ou a necessidade de defini¢ao de palavras
+chaves, por parte de especialistas, para se realizar a extracao de informacgoes Uteis de conjuntos de
+dados textuais. Logo, a principal contribui¢ao desse artigo em relacao aos demais trabalhos que
+também se propdem a extrair informacgoes de dados textuais governamentais é a proposta de uma
+técnica de extracgao de conhecimento baseada no modelo Bag of Phrases, capaz de minerar as frases
+que melhor representam o conteudo de um determinado texto e que nao exige um conjunto de
+dados previamente rotulados e nem tem a necessidade de intervencao de especialistas durante o
+processo de descoberta de conhecimento.
+
+3. PROPOSTA
+
+Essa pesquisa aborda o problema cientifico da identificagao automatica dos produtos adquiridos
+em uma compra a partir da sua descricao textual. Para isso ¢ proposto um método que recebe um
+conjunto de descricdes textuais e retorna um conjunto de regras de identificacgao. Essas regras
+posteriormente sao utilizadas para identificar os produtos adquiridos a partir das suas descri¢des
+textuais. O método proposto esta ilustrado na Figura 1. Ele esta dividido em cinco passos
+obrigatorios e um opcional, sendo que essa etapa adicional ¢ executada dependendo da
+disponibilidade de especialistas do dominio. O objetivo desse sexto passo opcional é melhorar a
+forma de representacao do conhecimento das regras criadas, assim como fazer algumas adapta¢oes
+nas regras, de modo que essas possam ser mais adequadas para os propositos finais da classifica¢ao
+gerada, bem como para melhorar os resultados obtidos.
+
+Figura 1 - Processo de geracao de regras de identificacao de produtos
+
+* Suporte minimo
+* Tamanho Minimo de frase
+* Tamanho Maximo de frase
+
+'
+
+ 
+
+Regras
+
+ 
+    
+   
+
+} bal & > Filtrar us A Regras  yy----=---- ; Refinadas
+
+i Gerar Frases % Ww * Gerar =
+
+Se ! : Pré-processar Sy! Frases _, “PodarSub _ |. -[2]- ! Refinar a
+
+: BE A Candidatas frases Regras | regras | Y)
+
+. “By Frequentes
+Mineracao de Frases Opcional
+
+an Descoberta de conhecimento em texto
+
+Textuais de
+Compras
+
+Fonte: Elaboracao do Autor
+
+No contexto desse trabalho, uma frase é definida como uma sequéncia contigua de tokens.
+Sendo assim, nessa monografia, a tarefa de mineracao de frases pode ser caracterizada pela
+agregacao e contagem de todas as sequéncias iguais de tokens contiguos que satisfacam a um
+
+* Bag of Phrase: modelo de representacao utilizado no tratamento de dados textuais. Nesse modelo o texto é
+representado pela contagem das frases que 0 compdem, ignorando-se a gramatica e a ordem das frases.suporte minimo. Ou seja, a mineracao de frases se propée a identificar os padrdes sequenciais de
+tokens que mais se repetem em um determinado conjunto de dados textuais.
+
+Dessa forma, as seguintes propriedades, definidas em (EL-KISHKY et al. 2014) e (LIU et
+al. 2015), deverao ser atendidas no processo de mineracao de frases:
+
+e Frequéncia: A qualidade mais importante quando se julga se uma frase retransmite
+informac¢oes relevantes sobre um topico é a sua frequéncia de utilizacao dentro do topico.
+Uma frase que nao é frequente dentro de um topico, provavelmente nao ¢ importante para
+esse topico.
+
+e Completude: Se uma frase longa satisfaz ao critério da frequéncia, entao, as sub frases
+dessa frase longa também irao satisfazer a este critério, porém, serao menos informativas
+do que a frase mais longa, e dessa forma nao precisam ser consideradas na mineragao, pois
+a frase mais longa € mais completa.
+
+Devido as caracteristicas dos dados de portais de transparéncia, grandes volumes de
+informa¢oes com cargas diarias e incrementais. A solu¢ao proposta deve ser capaz de processar
+quantidades massivas de dados. Para atender a esse requisito, todo 0 processo foi concebido para
+rodar utilizando o Apache Spark (ZAHARIA et al. 2010), um framework para processamento de
+grandes volumes de dados (Big Data) que roda de forma paralela em cluster de computadores.
+
+As secdes seguintes descrevem em mais detalhes as etapas do método proposto.
+
+3.1. PRE-PROCESSAMENTO
+
+O pré-processamento é a primeira etapa do método, e tem o objetivo de preparar o conyunto
+de dados para as atividades subsequentes. Essa etapa de pré-processamento retira informacdes que
+estao presentes no campo de descri¢ao da compra, mas que nao fazem parte da especificacao
+textual do produto. O principal objetivo desse procedimento ¢é a eliminacao de informacoées
+desnecessarias que possam prejudicar a analise das sequéncias de palavras geradas.
+
+Figura 2 - Resultado do Pré-processamento
+
+Especificacao textual do produto
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA,
+TIPO SUCO PRONTO PARA BEBER, EMBALAGEM TETRA PAK DE
+
+Descrig¢ao da compra 1 LITRO, COM TAMPA ABRE-FECHA, DIVERSOS SABORES,
+36,00000 UN ALIMENTO INDUSTRIALIZADO CONSUMO VALIDADE MINIMA DE 120 DIAS. (MARCA REFERENCIA: COCA
+HUMANO BEBIDA, TIPO SUCO PRONTO PARA BEBER, COLA OU COM QUALIDADE EQUIVALENTE OU SUPERIOS)
+EMBALAGEM TETRA PAK EMBALAGEM DE 1 LITRO, COM a
+
+TAMPA ABRE-FECHA, DIVERSOS SABORES, VALIDADE
+
+MINIMA DE 120 DIAS. (MARCA REFERENCIA: COCA COLA OU Ny Caracteristicas extraidas
+COM QUALIDADE EQUIVALENTE OU SUPERIOR). MARCA: DA 2 .
+
+FRUTA ITEM DO PROCESSO: 00034 ITEM DE MATERIAL: _ oa ae me
+
+EE Unidade de Medida: UN
+
+000074365
+eeee— Marca: Da Fruta
+
+Item de Processo: 00034
+Item de Material: 000074365
+
+Fonte: Elaboracao do Autor
+
+Na Figura 2 é ilustrado o resultado do pré-processamento de uma descri¢ao de compra.
+Nesse procedimento, algumas informa¢oes sao identificadas e extraidas, através das técnicas
+
+6enunciadas em (ETZIONI et al. 2005). Essas técnicas pregam a utilizacao de templates na atividade
+de extracao de informacoées de dados textuais. Para isso, cada template é utilizado para extrair um
+tipo de relacao especifica entre as palavras que aparecem no texto. Por exemplo, o template “‘tais
+como” na frase, “Cidades tais como Rio de Janeiro e Sao Paulo” permite-nos concluir que os
+termos Rio de Janeiro e Sao Paulo sao instancias do conceito cidade.
+
+Para o caso das descrigdes textuais das compras, formam identificados templates
+especificos para esse contexto, e as relagoes obtidas pela aplicacgao dos templates ocorrem entre a
+compra em si e o termo referenciado pelo padrao buscado. Essas relagoes permanecem verdadeiras
+nas diferentes descrig¢des de compras porque parte dessas descri¢des ¢€ gerada de forma
+automatizada, a partir de alguns dados estruturados, enquanto que, a especificacao do produto,
+propriamente dito, é feita manualmente. Dessa forma, o termo: “Marca: Da Fruta” evidencia que
+a compra que esta sendo descrita se refere a um produto cuja marca é Da Fruta.
+
+Sendo assim, a utilizacao de simples templates de identificagao permite a extragao de uma
+série de caracteristicas da compra que, apos a devida classifica¢ao do produto, ao final de todo o
+processo, podem agregar maior conhecimento a respeito das informa¢oes apresentadas. Portanto,
+apesar dessas caracteristicas extraidas nao serem utilizadas na proposta apresentada, elas sao
+utilizadas no processo de valida¢ao dessa proposta, assim como para as aplicacgdes que podem ser
+realizadas com os resultados obtidos com o emprego da técnica desenvolvida. Logo, além da
+retirada de termos que possam prejudicar a minerac¢ao textual, essa fase também é responsavel pela
+extracao de algumas caracteristicas da compra, que ao final do processo permitem agregar maior
+conhecimento a respeito dos produtos que estao sendo adquiridos.
+
+Cabe ressaltar que esse procedimento nao serve para a identificagao do produto que esta
+sendo especificado na descric¢ao da compra. Essa impossibilidade se da porque nao ha um padrao
+na especificacao textual dos produtos, uma vez que, essa especifica¢ao ¢ feita de forma manual, e
+cada pessoa preenche a designa¢ao do produto de uma forma diferente.
+
+Outra atividade realizada na etapa do pré-processamento é a filtragem dos dados que nao
+se referem a compra de materiais, visto que, existem outros tipos de gastos que nao dizem respeito
+a compra de produtos, como por exemplo, contratacao de servi¢os e pagamento de pessoal. Essa
+pesquisa nao considera os contratos de prestacao de servicos pelo fato desses apresentarem grande
+variabilidade de caracteristicas, o que faz com que cada contratacao seja Unica.
+
+Durante o pré-processamento, também ¢é realizado um tratamento no texto de forma que
+todas as letras presentes nas descri¢des de compras sejam passadas para o formato de letra
+maiuscula e que todos os sinais de acentua¢ao sejam retirados.
+
+A saida dessa etapa é 0 conjunto pré-processado das descric6es textuais dos produtos. A
+proxima etapa, descrita na secao seguinte, tem por objetivo encontrar frases candidatas a
+identificag¢ao de um produto.
+
+3.2. GERAGAO DE FRASES CANDIDATAS
+
+Apesar do método proposto apresentar um enfoque estatistico, com o intuito de se diminuir o
+conjunto de possiveis combina¢oes de palavras, assim como para manter a expressividade das
+frases geradas, algumas consideracdes semanticas foram feitas:
+
+e Uma frase so pode ser formada se ela estiver contida dentro de uma determinada sentenga.
+Nessa pesquisa, considera-se senten¢a como sendo uma sequéncia de palavras delimitada
+por sinais de pontuacao que determinam o final de um periodo (ponto final, ponto de
+exclamac¢aéo ou ponto de interrogacao).e Se um determinado token W esta localizado na posi¢ao n de uma sequéncia de tokens de
+uma sentencga, para que esse token W faca parte de uma frase, é necessario que todos os
+demais tokens localizados nas (n — 1) posic¢6es anteriores da sequéncia, também facam
+parte dessa frase. Essa restrigao foi formulada para garantir maior grau de expressividade
+para as frases formadas, visto que, na lingua portuguesa o significado de uma frase vai se
+completando da esquerda para a direita.
+
+O Algoritmo | faz uso dessas consideragoes e realiza a geracao de frases a partir de um
+conjunto de especificagdes textuais de compras.
+
+Algoritmo 1 - Algoritmo de geracao de Frases Candidatas
+
+Algoritmo 1: Geracgao de Frases Candidatas
+
+Entrada:
+Conjunto de Especificacoes de Produtos F,
+tamanho minimo da frase mine
+tamanho maximo da frase max
+
+Saida:
+
+Vetor com frases construidas
+
+1. Inicio
+
+2 frases={]
+
+3 Para cada especificagao eem F Faga:
+
+4. | ! Sentencas= SeparaSentengas(e)
+
+a | | Para cada sentencaem sentencas Faga:
+
+6. | ! | Para m entre (172/1,max) Faga:
+
+7 | SE (tamanho(sentenca)>=m)
+
+8 | frases.insere(sentenca[0:11])
+9
+
+| | | | Fim
+10.00 | Fim
+MW.) Fim
+12. | Fim
+13. | retorna frases
+14. Fim
+
+Fonte: Elaboracao do Autor
+
+O algoritmo de geracaéo de frases candidatas recebe como entrada um conjunto de
+especificagdes textuais de produtos e como parametro um tamanho minimo e outro maximo para
+as frases a serem geradas, sendo que, o tamanho de uma frase é medido pelo numero de palavras
+que compoem essa frase. A saida do algoritmo proposto sera o conjunto de todas as frases geradas.
+
+Cabe ressaltar que os primeiros trabalhos que abordaram a questao de minera¢ao de frases
+(REN et al., 2015), (LIU et al., 2015) e (EL-KISHKY et al., 2014) ja propunham a utilizacao de
+algoritmos de geracao de frases, porém, nessa monografia foi proposto um algoritmo especifico
+para os propositos dessa pesquisa, que considera peculiaridades semanticas da lingua portuguesa.
+
+Para exemplificar o funcionamento do algoritmo de geracao de frases candidatas, na Figura
+3 € apresentada a especificacao textual de uma determinada compra, que seria um elemento
+pertencente ao conjunto de especificagdes de produtos E, que funciona como entrada para oalgoritmo, e as frases resultantes da aplicacao desse algoritmo para o caso de se utilizar os
+parametros de tamanhos minimo e maximo de frases como sendo 5 e 10, respectivamente. Nesse
+caso de exemplo, a especificacgao de entrada ¢ composta por duas senten¢as, que sao delimitadas
+por um ponto final, e a saida ¢ composta pelo conjunto de frases geradas a partir dessas duas
+sentenc¢as.
+
+Figura 3 — Exemplo do processo de Geracao de Frases
+
+Especificacao textual do produto Frases Geradas
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA
+BEBIDA, TIPO SUCO PRONTO PARA BEBER, ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO
+EMBALAGEM TETRA PAK DE 1 LITRO, COM TAMPA ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO
+ABRE-FECHA, DIVERSOS SABORES, VALIDADE 120 ME 1 MENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPOSUCO PRONTO
+DIAS. (MARCA REFERENCIA: COCA COLA OU COM ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO PARA
+QUALIDADE EQUIVALENTE OU SUPERIOS) ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO PARA BEBER
+
+MARCA REFERENCIA: COCA COLA OU
+
+MARCA REFERENCIA: COCA COLA OU COM
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE
+
+_ MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE
+
+* Tamanho Minimo de Frase: 5 MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE OU
+
+* Tamanho Maximo de Frase : 10 MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE OU SUPERIOR
+
+Parametros Usados
+
+Fonte: Elaboracao do Autor
+
+3.3. FILTRAGEM DE FRASES FREQUENTES
+
+Apos a geracao das frases candidatas, 0 passo seguinte ¢ a agregacao das frases iguais, a
+fim de se contar o numero de ocorréncias de cada uma das frases geradas. Sendo assim, para cada
+frase gerada pelo algoritmo de geracao de frases candidatas é feita uma verificagao e contagem de
+todas as frases coincidentes. O algoritmo executado nessa etapa nao é apresentado pelo fato de ser
+bem simples, uma vez que, ele apenas faz uma agregacao e contagem das frases iguais e
+desconsidera aquelas frases cuja contagem nao atinja a um determinado suporte minimo, passado
+como parametro. Logo, ele recebe como entrada um conjunto de frases geradas (saida da etapa
+anterior), conta o numero de ocorréncias de cada uma dessas frases, e apresenta como saida o
+conjunto de frases cujo numero de ocorréncias tenha superado o suporte minimo.
+
+Dessa forma, cada frase estara associada a um numero de ocorréncias, e aquelas frases que
+tiverem esse numero de ocorréncias superior a um suporte minimo, passado como parametro,
+prosseguem no processamento, enquanto que, as frases cujo numero de ocorréncias for inferior a
+esse suporte sao desconsideradas.
+
+Essa etapa tem o objetivo de atender ao critério da frequéncia, e o seu funcionamento é
+ilustrado pela Figura 4, sendo que, nesse exemplo considera-se 0 suporte minimo de 30. Dessa
+forma, na parte (a) da Figura 4 ¢ mostrado um conjunto de frases geradas, que foram obtidas pelo
+algoritmo de geracao de frases e sao a entrada do algoritmo de filtragem de frases. Na parte (b)
+sao mostradas algumas dessas frases ja grupadas e com as respectivas quantidades de ocorréncias
+de cada uma dessas frases. Por fim, na parte (c) da Figura 4 € apresentada a saida do algoritmo
+para o conjunto de frases e suportes considerados.Figura 4 — Exemplo do processo de filtragem de frases
+
+(a) Conjunto de Frases Geradas
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDATIPO
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPOSUCO
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO PARA
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDATIPO SUCO PRONTO PARA BEBER
+MARCA REFERENCIA: COCA COLA OU
+
+MARCA REFERENCIA: COCA COLA OU COM
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE OU
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE OU SUPERIOR
+
+(b) Frases Grupadas
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA (Quantidade: 94)
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDATIPO (Quantidade : 90)
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO (Quantidade : 84)
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO (Quantidade : 40)
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO PARA (Quantidade : 29)
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO PARA BEBER (Quantidade : 20)
+MARCA REFERENCIA: COCA COLA OU (Quantidade : 28)
+
+MARCA REFERENCIA: COCA COLA OU COM (Quantidade : 28)
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE (Quantidade : 28)
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE (Quantidade : 17)
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE OU (Quantidade : 13)
+
+MARCA REFERENCIA: COCA COLA OU COM QUALIDADE EQUIVALENTE OU SUPERIOR (Quantidade : 13)
+
+(c) Frases Filtradas
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDATIPO
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPOSUCO
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO
+
+Fonte: Elaboracao do Autor
+
+3.4. PODA DE SUBFRASES
+
+EL-KISHKY et al. (2014) definem duas propriedades na mineracao de frases:
+e Lema do fechamento para baixo: Se uma frase G nao é frequente, entao as super frases de
+G (frases que contém G) também nao serao.
+e Antimonotonicidade dos dados: Se um documento nao contém frases frequentes de
+comprimento n, o documento nao contém frases frequentes de comprimento maior que n.
+
+A aplica¢ao dessas propriedades ao conjunto de frases resultante do passo anterior serve
+para reduzir a quantidade das frases decorrentes do processo de mineracao. Sendo assim, se uma
+frase G, formada pela sequéncia de palavras w, w2 ... Wy, atende ao requisito do suporte minimo,
+entao, todas as suas sub frases G' = w, W> ... We, com k <n, também atenderao a esse suporte,
+porém, elas nao precisarao ser analisadas, uma vez que as frases maiores (em que elas estao
+contidas) j4 contemplam ao requisito necessario (suporte minimo). Logo, é executado uma poda
+aplicando essa propriedade de forma a reduzir o numero de frases mineradas.
+
+No Algoritmo 2 ¢ mostrado 0 processo de poda das sub frases. Esse algoritmo recebe como
+entrada todas as frases geradas que atenderam ao critério do suporte minimo, e oferece como saida
+apenas as super frases (ou seja, frases contidas em outras frases maiores que também atendam ao
+
+10requisito do suporte minimo sao desconsideradas). Essa etapa tem 0 objetivo de atender ao critério
+da completude (definido no inicio da seg¢ao 3).
+
+Algoritmo 2 - Algoritmos de Poda de Sub Frases
+Algoritmo 2: Poda Sub Frases
+
+Entrada:
+
+Vetor H, com as frases que satisfazem o suporte minimo
+Saida:
+
+Vetor com SuperFrases
+
+1
+
+2 frasesDeQualidade=[]
+
+3 Ordena(H) // ordena em ordem decrescente de tamanho
+4. | Para cada frase h em H Faga:
+
+5. | ! SuperFrase=Verdadeiro
+
+6. | | Para cada frase sp em frasesDeQualidade Faga:
+7 Se h em sp Entao:
+
+8 | SuperFrase=Falso
+
+9
+
+| | | | continua
+11. | ! Fim
+12. | | Se SuperFrase=Verdadeiros Entao
+i. ! ! ! frasesDeQualidade.insere(h)
+14.5 | Fim
+15. | Fim
+16. ! retorna frasesDeQualidade
+17. Fim
+
+Fonte: Elaboracao do Autor
+
+Para exemplificar o funcionamento do algoritmo de poda de sub frases, a Figura 5
+apresenta, no lado esquerdo, um conjunto de frases resultantes do processo de filtragem de frases,
+ou seja, frases que tenham atendido ao suporte minimo passado como parametro. Ja o lado direito
+da Figura 5 representa a saida do algoritmo, considerando-se como entrada as frases apresentadas
+do lado esquerdo da figura.
+
+Figura 5 - Exemplo do processo de poda de sub frases
+
+Frases Filtradas Super Frases
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDATIPO
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDATIPOSUCO
+
+ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPOSUCO PRONTO
+
+CANETA ESFEROGRAFICA, MATERIAL ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO
+CANETA ESFEROGRAFICA, MATERIAL PLASTICO — CANETA ESFEROGRAFICA, MATERIAL PLASTICO, QUANTIDADE CARGAS 1 UM
+CANETA ESFEROGRAFICA, MATERIAL PLASTICO, QUANTIDADE
+
+CANETA ESFEROGRAFICA, MATERIAL PLASTICO, QUANTIDADE CARGAS
+
+CANETA ESFEROGRAFICA, MATERIAL PLASTICO, QUANTIDADE CARGAS 1
+
+CANETA ESFEROGRAFICA, MATERIAL PLASTICO, QUANTIDADE CARGAS 1 UM
+
+Fonte: Elaboracao do Autor
+
+113.5. GERACAO DE REGRAS
+
+A ultima etapa do processo é a geracao das regras de identificacgao. As regras sao do tipo:
+“SE antecedente ENTAO consequente”, sendo o antecedente a premissa, definida por uma
+determinada frase, e o consequente o produto a ser identificado a partir da premissa.
+
+Logo, cada frase resultante do processo de poda de sub frases da origem a uma regra
+distinta. Dessa forma, assume-se que todas as compras que se enquadrarem em uma determinada
+regra de identificagao (ou seja, todas as compras cuja especificacao tenha alguma frase que
+coincida com uma determinada frase considerada como antecedente, que resultou do processo de
+mineracao de frases) se referem a um mesmo tipo de produto.
+
+Portanto, a regra | vai identificar um determinado produto 1, a regra 2 identifica um
+determinado produto 2 e assim por diante. Na Figura 6 sao apresentados dois exemplos de regras
+geradas a partir das super frases resultantes da etapa de Poda de Subfrases.
+
+Figura 6 — Regra Gerada
+Regra 1: SE ALIMENTO INDUSTRIALIZADO CONSUMO HUMANO BEBIDA TIPO SUCO PRONTO ENTAO PRODUTO 1
+
+Regra 2: SE CANETA ESFEROGRAFICA, MATERIAL PLASTICO, QUANTIDADE CARGAS 1 UM ENTAO pRoDUTO2
+
+Fonte: Elaboracao do Autor
+
+3.6. REFINAMENTO DE REGRAS
+
+Conforme dito anteriormente, a solu¢ao proposta ainda prevé uma sexta etapa. Porém, a
+etapa de refinamento de regras é opcional e depende da disponibilidade de especialista de dominio
+para a realizacao dessa tarefa, visto que, essa ultima etapa carece de uma interagao humana. Essa
+etapa tem o objetivo de melhorar a forma de representacao do conhecimento expressa pelos
+consequentes das regras geradas, bem como possibilitar a agrega¢ao, ou elimina¢ao de regras de
+acordo com o grau de especificidade, ou generalidade, que se deseja dar no processo de
+identificagao das compras.
+
+Durante essa etapa, os especialistas analisam as regras geradas e fazem a selecao e
+validacao dessas regras, bem como a escolha de consequentes semanticamente mais apropriados
+para cada regra. Logo, o esfor¢o dos especialistas nessa fase se resume em fazer a selecao e
+validacao dos antecedentes e reformular os consequentes de cada regra.
+
+e Selecao/validacao dos antecedentes: Esse procedimento tem duas finalidades, a
+primeira se da porque, apesar das frases tenderem a ter um alto grau de
+expressividade, pois, elas atingiram uma frequéncia alta de ocorréncia, em algumas
+situagdes elas podem nao transmitir informagdes capazes de discriminar um
+determinado produto. Outra razao que justifica o beneficio da interagao humana é
+a definicao do grau de especificidade que se deseja dar a um determinado produto.
+Por exemplo, um produto pode ser identificado como suco de laranja ou
+simplesmente como suco, dependendo da analise que se deseja fazer, e a selecao
+dos antecedentes das regras de identificacao tem importante papel nesse processo.
+
+e Reformulacgao de consequentes: Um papel relevante, executado por especialistas, é
+a interpretagao dos antecedentes das regras, a fim de definir consequentes
+
+12semanticamente mais apropriados. Por exemplo, nas regras apresentadas na Figura
+6, pode-se substituir os consequentes PRODUTO 1 e PRODUTO 2 por SUCO
+INDUSTRIALIZADO e por CANETA ESFEROGRAFICA nas regras 1 e 2,
+respectivamente. Outra vantagem dessa atividade € a possibilidade de se definir
+consequentes iguais para regras diferentes, mas que tenham o mesmo conteudo
+informacional. Por exemplo, um especialista pode definir um mesmo rotulo para os
+antecedentes “dipirona, solucao oral 500 mg/ml” e “novalgina gotas 500 mg/ml’,
+associacao essa que seria dificil de se fazer de forma automatizada.
+
+4. AVALIAGAO
+
+Como citado anteriormente, a questao de pesquisa desse trabalho é¢ “como identificar de
+forma automatizada os produtos a partir das especificagdes textuais que sao usadas para
+caracteriza-los nas descrigdes dos gastos que sao apresentados nos portais de transparéncia
+publica?”’, dessa forma, a avaliacao foi desenvolvida de forma a verificar se a solugao proposta foi
+capaz de responder a essa questao de pesquisa, e se a hipotese, “se forem identificadas as
+sequéncias de tokens que mais se repetem em um determinado conyunto de descricao de compras,
+entao, essas sequéncias de tokens caracterizarao os produtos mais comprados desse conjunto de
+descricdes”’, €é verdadeira ou nao. Sendo assim, essa secao apresenta um estudo que tem o objetivo
+de avaliar os resultados obtidos pela aplicacgao da solucao proposta em um conyunto de descricdes
+de compras (itens de empenho referentes a compra de material) que sao apresentadas no Portal da
+Transparencia do Governo Federal. Esses dados estao disponiveis para download no referido
+portal.
+
+4.1. PROJETO DE AVALIAGAO
+
+O projeto de avaliacao esta dividido em duas partes: a primeira consiste da avaliacao das
+regras geradas, enquanto que a segunda verifica a qualidade dos resultados obtidos no processo de
+identificagao de compras propriamente dito, sendo que, em ambos os casos, a validacao ¢ feita
+apos a aplicacao das regras a um conjunto de descricdes textuais de compras referentes ao ano de
+2015 dos dados apresentados no Portal da Transparencia do Governo Federal, sendo que, os dados
+referentes ao més de janeiro foram utilizados para a geracao das regras e os dados referentes aos
+outros meses do ano foram utilizados para a aplicac¢ao das regras criadas. Cabe ressaltar que se
+optou por utilizar-se os dados de 2015 nessa fase, para utilizar-se os dados dos anos seguintes (de
+2016 a 2019) nas aplicac6es apresentadas na Secao 5.
+
+4.1.1. Avaliagao das Regras
+
+A avaliacao das regras geradas é feita através da aplicagcao de um método de clusterizacao.
+Dessa forma, para cada uma das regras de identificag¢ao, sao utilizadas as compras que se
+enquadraram nessas regras. Em tal procedimento, utiliza-se os atributos da classificagao da
+
+13natureza de despesa detalhada*, como variaveis para o calculo dos clusters formados pelas compras
+que se enquadram nas regras.
+
+Partindo-se da premissa de que compras que se referem a um mesmo produto possuem a
+mesma classificacao de natureza de despesa, considerou-se que em uma situacao ideal, o processo
+de clusterizagao de uma regra perfeita iria gerar um unico cluster com todas as compras
+identificadas por essa regra concentradas nesse cluster Unico, pois as compras identificadas de
+forma correta irlam corresponder a compras de um mesmo produto, e consequentemente
+possuiriam os mesmos atributos de natureza de despesa detalhada.
+
+No entanto, numa situacao real, outras variaveis externas interferem na avaliacao do
+processo como um todo, como por exemplo a insergao de dados de natureza de despesa errada por
+parte dos usuarios responsaveis por tal atividade. Dessa forma, formulou-se as seguintes
+considera¢oes gerais para a analise dos clusters formados:
+
+e Caso haja varios clusters com quantidades equivalentes de ocorréncias de compras,
+provavelmente a regra nao é boa, pois ela esta pegando muitos produtos com classificacgao
+de natureza de despesa diferentes, e provavelmente esta identificando produtos diferentes
+como sendo iguais.
+
+e Em situacdes em que haja poucos clusters, sendo que apenas um cluster concentra a maioria
+das compras, e os demais possuem poucas ocorréncias, provavelmente essa regra é boa, e
+as ocorréncias dispersas (outros clusters) supostamente tenham sido fruto de classificagdes
+erradas da natureza de despesa, por parte da pessoa responsavel por inserir essa informa¢ao
+no sistema.
+
+A seguir € apresentado um exemplo do resultado do processo de clusterizag¢ao das compras
+identificadas por uma regra boa e por uma regra ruim, nas figuras 7.a e 7.b, respectivamente. Deve
+ser observado que essas figuras representam situacdes hipotéticas, e tém apenas o objetivo de
+ilustrar as configura¢oes resultantes do processo de clusterizag¢ao que caracterizam uma regra
+como sendo boa ou ruim. Os parametros utilizados para determinar a qualidade das regras sao
+especificados adiante, ainda nessa se¢ao.
+
+Figura 7 - Exemplos de configuracoes de clusters
+
+ee
+s 5 °e @ a" ®
+am -. 26 7 "5
+ae e s
+
+eee
+a,4 * *Ze
+e?
+
+(a) Exemplo de um clusters para uma regra boa (b) Exemplo de um clusters para uma regra ruim
+
+Fonte: Elaboracao do Autor
+
+3 A Natureza da Despesa Detalhada é uma classificacAo utilizada pela Contabilidade Publica, e é composta por um
+codigo formado por 8 digitos numéricos, divididos em 5 grupos, com a seguinte configuracao: X.Y.ZZ.MM.NN.
+Nessa codificacgao, o 1° digito indica 0 cédigo da categoria econdmica, o 2° digito indica o grupo de natureza de
+despesa, os 3° e 4° digitos indicam a modalidade de aplicacao, os 5° e 6° digitos indicam o elemento de despesa e os
+7° e 8° digitos indicam o sub elemento de despesa.
+
+14Conforme pode ser observado na Figura 7, quanto mais homogénea for a configura¢ao do
+cluster obtido pelo processo de clusterizagao das compras enquadradas em uma determinada regra,
+melhor sera a qualidade dessa regra. Por outro lado, quanto mais disperso for a configuragao desses
+clusters, pior sera a qualidade dessa regra, pois provavelmente essa regra esta identificando
+produtos diferentes, o que nao ¢ o comportamento esperado para as regras.
+
+4.1.2. Avaliagao da Identificagao
+
+Dada a inexisténcia de um conjyunto de dados previamente rotulado, associada a
+inviabilidade de se analisar individualmente cada um dos casos, a avaliacao dos resultados obtidos
+no processo de identificagao de compras é feita de forma qualitativa. No entanto, o processo de
+escolha da amostra a ser analisada qualitativamente ¢ feito por procedimentos quantitativos.
+
+Entao, a avaliacao utiliza uma abordagem empirica e emprega técnicas quantitativas e
+qualitativas. As técnicas quantitativas sao empregadas para a selecao de um conjunto amostral com
+maior probabilidade de ter sido classificado erroneamente. Ja as técnicas qualitativas sao utilizadas
+para analisar a amostra de dados selecionada.
+
+A abordagem também combina caracteristicas descritivas e explanatorias. A parte
+descritiva tem o objetivo de descrever as caracteristicas dos dados relativos a cada um dos tipos
+de produtos identificados, a fim de possibilitar a selegao dos casos em que as caracteristicas do
+produto diferem dos demais da mesma espécie. Ja a parte explanatoria tem o objetivo de analisar
+de forma mais detalhada esses casos selecionados, a fim de avaliar se a identificagao do produto
+foi feita corretamente ou nao.
+
+Logo, as compras sao grupadas por produtos, e para cada um dos grupos de produtos buscase por outliers. Sendo assim, partindo-se da premissa que produtos iguais tendem a apresentar
+caracteristicas similares, pode-se inferir que aqueles produtos cujos atributos sejam discrepantes
+em relacao aos demais tem maior probabilidade de terem sido identificados de forma errénea.
+Dessa forma, pode-se selecionar uma amostra com casos mais propensos a terem sido classificados
+erradamente, otimizando assim a atividade dos especialistas responsaveis pela analise qualitativa
+desses resultados.
+
+4.1.3. Estudo de Caso
+
+A proposta de geracao de regras de identificacao, descrita na Secao 3, utiliza, além dos
+dados de entrada (um conjunto de descri¢gdes textuais de compras), trés tipos de parametros:
+tamanho minimo de frase, tamanho maximo de frases e suporte. Sendo assim, utilizou-se como
+fonte de dados de entrada, para a geracao das regras de identificacao, as descrigdes de compras
+dos itens de empenho, apresentados no Portal da Transparéncia do Governo Federal, referentes ao
+més de janeiro do ano de 2015, e executou-se um estudo de caso composto por uma série de
+experimentos, sendo que, para cada um dos experimentos utilizou-se uma combina¢ao diferente
+dos parametros requeridos pelo processo de geracao de regras, ou seja, variou-se os valores de
+tamanhos maximo e minimo de frase e 0 suporte requerido.
+
+Para a verificacao dos resultados obtidos pelo processo de identificagao das descricdes
+textuais de compras, utilizou-se os dados das descrigdes de compra dos itens de empenho,
+apresentados no Portal da Transparéncia do Governo Federal, referentes aos meses de fevereiro a
+dezembro do ano de 2015. Uma vez realizados os experimentos, com as diferentes configura¢oes,
+
+15analisou-se os resultados obtidos, a fim de se verificar a consisténcia das regras geradas com cada
+uma das configuracdes de parametros.
+
+4.2. EXPERIMENTOS
+
+Durante a execucao do estudo de caso foram realizados seis experimentos, conforme
+configuracao apresentada na Tabela 1. A intengao da variacao dos parametros utilizados
+possibilitar uma analise do comportamento da solucao proposta com diferentes configuragoes,
+fim de se identificar aquela mais apropriada para a situacao apresentada.
+
+oOo Ad &
+
+Tabela 1 - Parametros dos experimentos realizados
+
+Experimento 2
+
+Experimento 5
+
+ 
+
+Fonte: Elaboracao do Autor
+
+4.2.1. Analise das Regras Geradas
+
+Conforme apresentado na subsec¢aéo 4.1.1, as regras geradas sao avaliadas pela aplicacao de
+métodos de clusterizacao. Dessa forma, utilizou-se 0 algoritmo “Density Based Spatial Clustering
+of Application with Noise” — DBSCAN (ESTER et al ,1996) - para executar os testes.
+
+O DBSCAN (ESTER et al ,1996) € um método de clusterizagao nao paramétrico baseado
+em densidades. A escolha desse método se deu pelo fato dele nao exigir que sejam informados
+previamente o numero de clusters a serem encontrados.
+
+Dessa forma, para cada uma das regras de identificagaéo, aplicou-se 0 método de
+clusterizagao DBSCAN em todas as compras identificadas por essa regra, utilizando-se os
+atributos de natureza de despesa detalhada como variaveis a serem consideradas nesse processo de
+clusterizac¢ao.
+
+Para auxiliar na geracdo dos clusters, foi utilizada a ferramenta RapidMiner*, sendo que,
+todos os 6 experimentos executados foram considerados. Dessa forma, classificou-se as regras em
+trés categorias diferentes, de acordo com a configuracao dos clusters gerados. Sendo assim, uma
+regra pode ser classificada como sendo boa, regular ou ruim.
+
+e Regra Boa
+Para uma regra ser considerada como boa, é necessario que o processo de clusterizacao
+gere um cluster com mais de 90% das compras classificadas nessa regra.
+Um exemplo de uma regra considerada como boa é a regra R_22 do experimento 6, cujo
+antecedente ¢ formado pela seguinte sequéncia de tokens: “caneta esferografica, material plastico,
+quantidade cargas | un” e que concentra 95,38% das ocorréncias em um mesmo cluster.
+
+* https://rapidminer.com
+
+16e Regra Regular
+
+Para que uma regra seja considerada como regular, € necessario que o processo de
+clusterizagao gere 2 clusters cuja soma das percentagens das ocorréncias supere os 90%. Essa
+consideracao é feita para se atender aos casos em que um mesmo produto pode ser enquadrado em
+duas classificagdes de natureza de despesa detalhada diferentes. Por exemplo, o produto “Reagente
+para diagnostico clinico” que pode ser enquadrado tanto na natureza de despesa detalhada
+3.3.90.30.09 quanto na 3.3.90.30.36, que correspondem a material farmacologico e material
+hospitalar, respectivamente. Para o experimento 6, uma regra classificada como regular foi a regra
+cujo antecedente era formado pela seguinte sequéncia de palavras: “reagente para diagnostico
+clinico, tipo conjunto completo para” que possui os dois clusters mais populosos com 54,38% e
+42,50% das ocorréncias.
+
+e Regra Ruim
+
+Sempre que uma regra nao se enquadrar em uma das duas situagoes anteriores (regra boa
+ou regular), ela é considerada como ruim. Um exemplo de uma regra considerada como ruim é a
+regra R_1 do experimento 6, cujo o antecedente é¢ formado pela sequéncia de palavras “, numero
+de referencia quimica cas”, pois essa sequéncia de palavras permite-nos inferir que o produto que
+esta sendo especificado possui algum tipo de elemento quimico em sua composicao, porém,
+diferentes tipos de produtos podem ser enquadrados nessa regra. Tal regra gerou 40 clusters
+distintos e apresentou a seguinte distribuicao de frequéncia de ocorréncia para os 5 clusters mais
+populosos: 57,04%, 14,59%, 11,44%, 4,99% e 3,79%.
+
+Os experimentos geraram diferentes quantidades de regras, sendo que 0 experimento 6 foi
+O que gerou menos regras, totalizando 25 regras distintas. Dessa forma, para se comparar a
+qualidade das regras geradas em cada um dos experimentos, considerou-se todas as 25 regras
+geradas para o experimento 6, e para os demais experimentos considerou-se as 25 regras que
+tenham tido mais compras classificadas
+
+Na Tabela 2 sao apresentados os clusters obtidos para as compras classificadas de acordo
+com as regras geradas na execu¢ao do experimento 6. Essa tabela apresenta uma linha para cada
+uma das 25 regras geradas, e colunas com a identificagao das regras, numero de clusters gerados
+por regra, porcentagem de itens de compra classificados nos 5 clusters mais populosos de cada
+regra e classificacao da regra de acordo com os critérios citados acima (boa, regular ou ruim).
+
+Conforme pode ser observado na tabela 2, 0 experimento 6 gerou 15 regras boas, 5 regras
+regulares e 5 regras ruins.
+
+A tabela com os resultados obtidos nos processos de clusterizagéo dos demais
+experimentos foram omitidas por uma questao de otimizacao de espaco, porém, na Figura 8 ¢
+apresentado um quadro resumo com o resultado obtido por cada um dos experimentos apos a
+classificacao das regras de acordo com os critérios de qualidade de regras definidos anteriormente.
+
+> O numero de referéncia quimica CAS é um numero de registro que todo os produtos quimicos tém, esse numero
+unico de registro consta no banco de dados do Chemical Abstracts Service, uma divisao da Chemical American
+Society, e serve para identificar um determinado produto quimico. Logo, todos os produtos quimicos adquiridos pela
+Administra¢ao Publica Federal irao possuir a sequéncia de palavras “numero de referencia quimica cas’’, no entanto,
+tal sequéncia de palavras nao é suficiente para identificar um determinado produto quimico.
+
+17i
+Q.
+
+Regra
+
+sBeRe errr er rE
+
+me tee PR tReet Rel [rR [Oo lool/rn {On {[Mms} Bl [Nb] Re
+
+AA
+SIIA|N} BRI] W/O] — fo
+
+“Ee
+
+30
+4
+
+  
+  
+
+ 
+
+ 
+
+ 
+
+Tamanhos de Frases
+
+ 
+
+Qtd de
+
+1° mais
+populoso
+57,04
+96,20
+95,46
+94,15
+76,16
+100,00
+69,07
+79,45
+52,82
+93,14
+96,89
+94,96
+76,75
+93,41
+97,41
+94,28
+53,17
+54,38
+100,00
+51,23
+54,59
+95,38
+95,44
+
+Clustres
+
+ 
+
+2° mais
+DOpuloso
+
+3° mais 4° mais
+DOpuloso DOpuloso
+
+4,99
+0,40
+1,05
+11
+2,28
+pf
+
+1,86
+3,14
+1,07
+358 | 0,66 | 0,61
+0,36
+0,89
+
+1,06
+0,26
+1,48
+8,44
+0,77
+
+fe
+
+1,44
+0,98
+0,46
+0,68
+
+93,49 1,20
+8 | 95,23 0,67
+
+Fonte: Elaboracao do Autor
+
+   
+  
+     
+   
+
+Situacao
+da Regra
+
+    
+
+  
+
+5° mais
+DOpuloso
+
+= | Boa
+= | Ruim
+= | Boa
+
+Figura 8 - Qualidade das regras geradas por experimento
+
+Min: 10 | Experimento1
+zy
+
+ 
+
+Boa:
+Regular: 2
+Ruim: 2
+
+Experimento 2 Experimento 3 !
+
+  
+ 
+ 
+
+Fonte: Elaboracao do Autor
+
+Boa: 1741 Boa: 171
+
+Regular: 51! Regular: 6}
+
+Ruim: 311 Ruim: 21
+
+I
+Experimento4 || Experimento5 || Experimento6
+
+4 l
+Boa: 21}! Boa: 16! Boa: 15
+Regular: 311 Regular: 61 Regular: 5
+Ruim: 14! Ruim: 3! Ruim: 5
+
+I
+
+i! I
+
+Lain aaeiiaeaNeRIRNS Ll cmemmmmmmnnmnal
+
+Grupo 1 Grupo 2
+
+18Analisando-se separadamente os grupos de experimentos com mesmo tamanho de frases,
+conforme apresentado na Figura 8 (Grupo A e Grupo B), percebe-se que a medida em que se
+diminui o valor do suporte, para um mesmo tamanho de frase, a tendéncia é que a qualidade das
+frases melhore.
+
+Por outro lado, analisando-se os grupos de experimentos para um mesmo suporte, com
+diferentes tamanhos de frases, conforme apresentado na Figura 8 (Grupos | e Grupo 2), esperavase que tamanhos de frases maiores produzissem regras de melhor qualidade, porém, os
+experimentos realizados nao foram capazes de comprovar essa hipotese.
+
+4.2.2. Analise dos Resultados
+
+Apos a avaliacao das regras geradas, 0 passo seguinte é a avaliacao dos resultados obtidos
+pela aplicacao dessas regras. Com o intuito de se deixar os trabalhos de analise mais concisos,
+utilizou-se como parametro apenas as regras geradas no experimento 6. Porém, esse procedimento
+pode ser replicado para qualquer um dos demais experimentos realizados. A analise também so
+avalia as regras consideradas como “Boas”, dessa forma, o numero inicial de 25 regras geradas cai
+para 15 regras.
+
+Conforme mencionado anteriormente, essa avaliacao faz uma analise qualitativa dos
+resultados obtidos. A seleg¢ao do conjunto amostral a ser analisado é feita de forma a identificar
+aquelas compras com maior probabilidade de terem sido classificadas de forma errénea. Sendo
+assim, para cada uma das regras classificadas como “Boa”, foram identificados outliers,
+considerando-se trés atributos para o calculo desses outliers: “Valor unitario”, “unidade de
+medida” e “marca’’. A escolha desses atributos se deu pelo fato de que produtos iguais tendem a
+possuir valores unitarios proximos, unidades de medida e marca semelhantes, ou seja, caso um
+determinado produto apresente valor, unidade de medida ou marca muito diferente dos demais
+produtos do mesmo tipo, ele sera classificado como um outlier, e tera uma probabilidade maior de
+ter sido identificado de forma err6nea, sendo assim selecionado para uma analise mais minuciosa.
+No entanto, cabe ressaltar que tal consideragao é apenas uma premissa, visto que, é possivel que
+produtos iguais tenham marcas, unidades de medida ou valores unitarios totalmente diferentes.
+Dessa forma, esse é apenas um critério para a selecao da amostra a ser analisada, porém, a
+qualidade dos resultados é verificada pela analise individualizada das compras selecionadas.
+
+Quanto a obtencao dos atributos considerados no processo de clusterizacao, o campo
+“Valor unitario” ja estava presente na base de dados utilizada, como um atributo estruturado. Os
+campos “unidade de medida” e “marca” foram obtidos durante a etapa de pré-processamento,
+descrita na Secao 3.1.
+
+O algoritmo utilizado para a deteccao dos outliers fo1 o apresentado em (RAMASWAMY;
+RASTOGI; SHIM, 2000). No algoritmo em questao, a deteccao de outliers é feita através do
+calculo da distancia de um ponto a seus q-ésimos vizinhos mais proximos. Dessa forma, cada ponto
+€ classificado com base na sua distancia a seus q-ésimo vizinhos mais proximos, e os r pontos
+superiores, neste ranking (ou seja, os r pontos com maiores distancias a seus vizinhos) sao
+declarados como outliers. Logo, os valores de gq e r podem ser definidos como o numero de
+vizinhos a serem considerados e 0 numero de outliers a serem identificados, respectivamente.
+
+19Tabela 3 - Outliers identificados por regra
+
+Purchase Applied rule Considered Attributes
+Identification
+Unit
+
+2015NE800889 100.000.000,00
+2015NE800586 2 87.279.000,00
+
+Pe
+
+2015NE800803
+2015NE801154
+2015NE804597
+2015NE803169
+2015NE801459
+2015NE801459 | 8
+2015NE801077
+2015NE801613
+2015NE800466
+2015NE800899
+2015NE800375
+
+2015NE806768
+2015NE800075
+2015NE800736
+2015NE800068
+2015NE800809
+
+UNIDADE
+UNIDADE
+553.834,29
+
+0
+0
+l
+l
+2
+Z
+4
+4
+5
+5
+6
+
+Bequer de vidro 900,00 | UNIDADE VELP
+
+7.157.000,00 SHELL
+
+2
+3
+3
+4
+4
+6
+6
+l
+l
+1
+1
+l
+l
+l
+1
+]
+l
+]
+
+Ps
+
+530,
+para laboratorio
+metalico
+metalico
+
+2015NE800006 R_22 135,10 | CAIXA 12,00 UN
+
+hidratado combustivel
+hidratado combustivel
+combustivel
+combustivel
+
+2015NE800035 R 25 | Peca para automovel 560.000.000,00 | MENSAL Conforme Edital
+
+2015NE800134 R25 | Peca para automével 1.000.000.000,00 | UNIDADE - ORIGINAL
+PECAS
+
+Fonte: Elaboracao do Autor
+
+2015NE800588 30,00 | UNIDADE
+para laboratorio
+UN
+
+XD
+
+7) 7A) 7} wl wl A
+a
+
+ 
+
+© O cddigo do empenho nao esté completo (com os 23 digitos) para nao possibilitar a identificacéo da unidade que
+executou a compra, visto que, esse trabalho nao tem foco na area de auditoria, 0 unico objetivo desse procedimento ¢
+fazer a identificagao de compras consideradas como outliers e que por essa razao possam ter sido classificadas de
+forma erronea.
+
+20Na execucao desse estudo, utilizou-se como parametro gq (numero de pontos vizinhos a
+serem considerados) o valor 10, e o numero de outliers a serem encontrados foi definido como
+sendo 2 (r =2). Sendo que, para o calculo da distancia entre os pontos foi utilizada a formula da
+distancia euclidiana.
+
+Na Tabela 3 sao apresentados os resultados obtidos pelo algoritmo para cada uma das
+regras analisadas. As 2 primeiras colunas trazem a identificagao da compra, a terceira e quarta
+coluna apresentam a regra utilizada e o nome do produto identificado pela regra, respectivamente,
+e as demais colunas apresentam os atributos utilizados para a detec¢ao dos outliers.
+
+Apos a defini¢ao da amostra com os registros com maiores probabilidades de terem sido
+classificados erroneamente em cada uma das regras selecionadas (outliers), 0 passo seguinte ¢ a
+analise de cada um desses registros de forma individualizada, nas paginas do Portal da
+Transparéncia, a fim de verificar se esses registros realmente correspondem ao mesmo grupo de
+produtos que a regra se propdem a identificar, ou se eles se referem a outros tipos de produtos e
+consequentemente tenham sido classificados de forma errada pelas regras.
+
+Sendo assim, todos os 30 registros apresentados na Tabela 3 (2 outliers por regra) foram
+analisados e verificou-se de forma detalhada os textos descritivos das especificagoes de compras
+a fim de se averiguar a que se referia cada uma das compras, possibilitando assim a comparacao
+com o tipo de produto que as regras estavam identificando.
+
+Na Figura 9, sao apresentados dois recortes de telas do portal da transparéncia, cada um
+com a descri¢ao de uma das compras caracterizada como outliers obtidos na aplicacao da regra
+R_3. Esses recortes de tela permitem verificar que apesar dos valores discrepantes, as
+especificacdes das compras realmente se referem ao produto esperado, ou seja, Agua Mineral.
+
+Figura 9 - Recortes das telas do Portal das Transparéncia para registros considerados
+outliers da regra R_3
+
+2015NE800899
+
+VALOR VALOR
+UNITARIO TOTAL  DESCRICAO$
+
+~ ~
+vv
+
+SUBITEM = QUANTIDADE
+
+vr od
+
+GENERO 1 61.800,4 61.80  0000000001,00000 GALAO 20,00 L AGUA MINERAL, MATERIAL AGUA MINERAL, TIPO EMBALAGEM PLASTICO POLICARBONATO
+
+S DE 8 0,48 TRANSPARENTE, GASEIFICACAO SEM GAS, CARACTERISTICAS ADICIONAIS COM TAMPA DE PRESSAO/LACRE/ENVASADO MECANICAMENTE/,
+ALIMENT NORMAS TECNICAS CONFORME PORTARIA DE CORRELATOS DO MINISTERIO SAU- MARCA: HYDRATE ITEM DO PROCESSO: 00001 ITEM DE
+ACAO MATERIAL: 000304461
+
+ 
+
+2015NE800466
+VALOR VALOR
+SUBITEM ¢ QUANTIDADE UNITARIO. TOTAL —_DESCRIGAO*
+GENEROS DE 1 52.602,06
+
+ALIMENTACAO
+
+ 
+
+Fonte: Elaboragao do Autor, com base em recortes de imagens do Portal da Transparéncia do
+Governo Federal
+
+4.3. CONCLUSAO DA AVALIAGAO
+
+Nessa analise, nao foram identificados produtos classificados de forma errénea, porém,
+algumas das regras geradas, mesmo sendo consideradas como boas, ainda que classificando as
+compras de maneira correta, faziam uma classificag¢ao muito genérica, que dependendo da
+finalidade para que se deseje utilizar 0 processo de mineracao de frases desenvolvido, possa nao
+
+21atender aos objetivos por completo. Exemplos desses tipos ocorrem com as regras R_ 6 e R_25,
+que identificam as compras de “produto perecivel” e “peca para automovel”’, respectivamente, ou
+seja, uma forma muito genérica para se identificar um produto.
+
+Para evitar situagdes como estas, a proposta prevé uma etapa opcional, apresentada na
+Secao 3.6 (refinamento de regras), em que especialistas podem, dentre outras atividades, ajustar
+as regras de acordo com o grau de especificidade que se deseja dar ao produto.
+
+Os resultados desses experimentos também exemplificam outra atividade que pode ser
+desempenhada por especialista nessa etapa opcional, que é a juncao de regras que identificam o
+mesmo tipo de produto. Por exemplo, as regras R_ 3 e R_11 levam ao mesmo produto (agua
+mineral), e por isso poderiam ser agrupadas. Também dependendo do grau de especificidade que
+se deseja dar ao processo, os especialistas poderiam juntar as regras R_23 e R_24, que identificam
+respectivamente “alcool etilico hidratado combustivel” e “alcool anidro combustivel’ para
+levarem a um unico produto, um pouco mais genérico, denominado “alcool combustivel”.
+
+Dessa forma, pode-se concluir que a questao de pesquisa “como identificar de forma
+automatizada os produtos a partir das especifica¢goes textuais que sao usadas para caracteriza-los
+nas descrigdes dos gastos que sao apresentados nos portais de transparéncia publica?” pode ser
+respondida pela solucao proposta e que a hipotese: “se forem identificadas as sequéncias de tokens
+que mais se repetem em um determinado conjunto de descri¢ao de compras, entao, essas
+sequéncias de tokens caracterizarao os produtos mais comprados desse conjunto de descrigdes” ¢
+verdadeira.
+
+5. APLICACOES
+
+Uma vez identificado a que produto cada uma das descrigdes de compras se refere, uma
+série de outras analises tornam-se viaveis. O objetivo dessa secao é apresentar algumas aplicacdes
+possiveis com as informacoes obtidas a partir do emprego das técnicas desenvolvidas nessa
+pesquisa. Para isso, utilizou-se os dados de itens de empenho, referentes ao periodo de janeiro de
+2016 ajunho de 2019, a fim de se fazer a identificacgao dos produtos que estao sendo especificados
+de forma textual. Dessa forma, analisou-se 18.492.622 registros de itens de empenho.
+
+5.1. CALCULO DE PRECGOS DE REFERENCIA DOS PRODUTOS COMPRADOS
+PELA ADMINISTRAGAO PUBLICA
+
+Conforme sugerido em (CARVALHO et al., 2013), a partir do momento em que se tem os
+produtos devidamente identificados, torna-se possivel se propor precos de referéncia para os
+diversos produtos que sao comprados pela Administragao Publica Federal e estao sendo
+apresentados em portais de transparéncia.
+
+Na Tabela 4 sao apresentados os precos de referéncia de 10 produtos, obtidos a partir dos
+itens de empenhos dos anos de 2016, 2017, 2018 e 2019.
+
+Para o calculo dos precos de referéncia apresentados na Tabela 4, considerou-se os precos
+dos produtos como sendo a mediana dos valores unitarios pagos em cada uma das compras desses
+produtos apresentados no Portal da Transparéncia, visto que, essa métrica esta menos suscetivel a
+influéncia de outliers.
+
+Outro fator relevante, € que em muitas situacdes o preco de um produto pode ser
+influenciado por questdes de sazonalidade e de localidade. Porém, como utiliza-se informac¢oes
+
+22dos empenhos, pode-se considerar qualquer um dos atributos do empenho para se fazer a agregacao
+e definir o critério de forma¢ao do prego de referéncia, como por exemplo, por data, por regiao,
+por Orgao de governo e etc.
+
+Tabela 4 - Amostra de precos de referéncia calculados
+Produto Unidade Preco Referéncia (Mediana)
+
+fCamedemar PRE 20fasfon ras
+a
+
+Fonte: Elaboragao do Autor, com base em dados tratados do Portal da Transparéncia do Governo
+Federal
+
+ 
+
+5.2. IDENTIFICACAO DE COMPRAS COM PREGOS MUITO ACIMA DO ESPERADO
+
+A partir do momento em que se consegue estabelecer um preco de referéncia para os
+diversos produtos comprados e apresentados nos portais de transparéncia, torna-se possivel
+também se identificar compras que tenham sido feitas com valores muito acima do esperado.
+
+Na Tabela 5 é apresentada uma amostra de 2 valores muito acima do esperado para cada
+um dos exemplos de precos de referéncia identificados na Tabela 4. Essa tabela ¢ apenas
+exemplificativa, visto que, devido ao grande numero de compras apresentadas no Portal da
+Transpar€éncia, o numero de compras consideradas muito acima do pre¢o de referéncia também ¢é
+elevado.
+
+Cabe ressaltar que esses valores elevados, apresentados na Tabela 5, nao sao suficientes
+para se dizer que tenha havido irregularidades nos referidos processos de compras, visto que,
+qualquer indicio levantado por meio da analise de dados carece de uma averiguacao mais
+aprofundada por meio de auditorias especificas. Também nao faz parte do escopo desse trabalho
+qualquer tipo de analise de compras individuais. No entanto, todos os processamentos sugeridos
+nessa monografia tornam viavel a identificacao de compras que fogem do padrao esperado,
+possibilitando novos tipos de analises que seriam impossiveis de serem feitas com a informa¢ao
+apresentada em formato original (formato textual).
+
+7 Os dados do ano de 2019 referem-se ao periodo compreendido entre os meses de janeiro a junho.
+
+23Tabela 5 - Amostra de precos muito acima do esperado de compras realizadas em 2019
+
+Produto Unidade Preco de Numero do Valor Unitario
+referéncia empenho
+(2019)
+
+Galao 20 L 8,47 2019NE800079
+
+2019NE800041
+25,00 2019NE800044
+2019NE800029
+Unidade 0,89 2019NE800020
+
+2019NE800278
+17,25 2019NE800198
+2019NE800024
+7,24 2019NE800088
+
+2019NE800432
+81,00 2019NE800077
+2019NE800025
+
+Agua mineral
+
+Caneta Esferografica Caixa 50 Unidades
+
+Caneta Marca Texto
+
+Carne de Boi
+
+A
+GQ
+
+Carne de Frango
+
+Cartucho Tinta Impressora | Unidade
+
+Diesel Litro 3,95 2019NE800398 62,50
+2019NE800072 54,94
+Gasolina Litro 4,85 2019NE800473 33,33
+
+2019NE800211
+2,41 2019NE800151
+2019NE801032
+14,70 2019NE801510
+2019NE800128
+
+Fonte: Elabora¢ao do Autor com base em dados tratados do Portal da Transparéncia do Governo
+Federal
+
+Laranja
+
+~
+ga
+
+Papel A4 Resma
+
+ 
+
+ga
+
+5.3. COMPARACAO ENTRE VALORES PAGOS EM COMPRAS LICITADAS E NAO
+LICITADAS
+
+No Brasil ha uma lei que prevé que todas as compras realizadas pela Administra¢ao Publica
+devem ser precedidas de licitagao, no entanto, essa mesma lei também prever algumas situa¢des
+em que o procedimento licitatorio pode ser dispensavel ou inexigivel.
+
+Um outro tipo de analise que pode ser feita a partir dos resultados obtidos pela técnica
+proposta nessa monografia é a comparacao entre os precos praticados nas compras de produtos em
+situagdes em que houve licitag¢ao e nos casos em que esse procedimento nao ocorreu.
+
+Na Tabela 6 sao apresentados os precos praticados, no ano de 2019, com e sem
+procedimento licitatorio, para os mesmos produtos listados na Tabela 4. Nesse caso, assim como
+na Tabela 4, os precos foram obtidos pela mediana dos valores unitarios de cada uma das compras.
+
+Como pode ser observado na Tabela 5, os produtos tendem a ser comprados por um preco
+maior quando nao ha um procedimento licitatorio anterior a essa compra. Cabe ressaltar que para
+o caso das compras de canetas esferograficas e de carne de frango, realizadas no ano de 2019, até
+o més de junho, todas as compras foram precedidas do procedimento licitatorio.
+
+Tais analises sO foram possiveis de serem realizadas pelo fato dos produtos terem sido
+anteriormente identificados.
+
+24Tabela 6 - Amostra de precos praticados em compras com e sem licitacao
+Produto Unidade Preco Praticado (Mediana)
+
+)Agua Mineral Mineral Galao 20 L R$ 6,20 R$ 10,51
+Caneta Sa Caixa 50 Unidades_ | R$ 25,00 a
+
+peta Ras
+feeemrone [Re faa =
+:
+
+Gasolina Litro R$ 4,36 R$ 4,59
+
+ 
+
+Laranja
+
+ 
+
+ 
+
+Papel A4 R$ 14,07 R$ 17,50
+
+Fonte: Elaboragao do Autor, com base em dados tratados do Portal da Transparéncia do Governo
+Federal
+
+ 
+
+5.4. IDENTIFICACAO DE FORNECEDORES VENDENDO O MESMO PRODUTO
+COM PREGOS DIFERENTES
+
+A partir do momento em que se tem os produtos devidamente identificados, pode-se juntar
+essas informa¢oes com outras informa¢oes que ja estao estruturadas na base de dados do Portal da
+Transparéncia, a fim de se enriquecer as analises feitas. Um exemplo disso é a identificagao de
+casos em que 0 mesmo fornecedor esta vendendo 0 mesmo produto com pre¢os muito diferentes.
+
+Na Figura 9 sao apresentados dois recortes de telas do portal da transparéncia do Governo
+Federal com duas compras de cartuchos para impressora. Ambas as compras se referem ao mesmo
+modelo de cartucho e o fornecedor também ¢€ 0 mesmo, poreém, 0 preco a ser pago tem uma
+variacao de mais de 60 %.
+
+Esse caso apresentado € apenas um dos muitos casos semelhantes identificados. Essas
+disparidades acontecem porque muitas vezes os processos de compra ocorrem de maneira
+independente, sendo que, uma unidade gestora nao fica sabendo do preco que uma outra unidade
+gestora esta pagando pelo mesmo produto ao mesmo fornecedor.
+
+A metodologia ora proposta pode ajudar na otimizacao das compras realizadas pela
+Administra¢ao Publica, permitindo que a unidade gestora possa propor renegociacoes de pre¢cos a
+serem pagos, quando identificados valores economicamente mais vantajosos sendo praticados pelo
+mesmo fornecedor, em outras vendas para a Administracao Publica.
+
+25Figura 9- Telas do Portal da Transparéncia com 0 mesmo fornecedor vendendo 0 mesmo
+produto com precos diferentes
+
+Compra 1
+Detalhamento do Gasto
+s BAIXAR
+VALOR VALOR
+SUBITEM —— UNITARIO TOTAL  DESCRICAOS
+MATERIAL DE 18 9499 1.709, 18,00000 UNIDADE CARTUCHO TONER IMPRESSORA SAMSUNG, REFERENCIA CARTUCHO MLT-D203U, TIPO CARTUCHO
+PROCESSAMENTO DE 82 ORIGINAL, COR TINTA PRETA MARCA: ORIGINAL MAXJET ITEM DO PROCESSO: 00001 ITEM DE MATERIAL: 000426542
+DADOS
+MATERIAL DE 6 798.9 6,00000 CAIXA 1,00 UN CARTUCHO TINTA IMPRESSORA LEXMARK, REFERENCIA CARTUCHO 60F4H00, TIPO CARTUCHO
+PROCESSAMENTO DE ORIGINAL, COR TINTA PRETA MARCA: ORIGINAL MAXJET ITEM DO PROCESSO: 00002 ITEM DE MATERIAL: 000427092
+DADOS
+
+ 
+ 
+    
+
+Compra Precos distintos— mesmo produto e mesmo fornecedor
+
+Detalhamento do Gasto
+
+& BAIXAR
+VALOR VALOR
+SUBITEM $ ——_ UNITARIO DESCRICAO
+- Descricao
+MATERIAL DE TIC - 4 795,9 §4,00000 UNIDADE CARTUCHO TINTA IMPRESSORA LEXMARK, REFERENCIA CARTUCHO 60F4HO00, TIPO CARTUCHO ORIGINAL,
+MATERIAL DE 6 COR TINTA PRETA MARCA: ORIGINAL MAXJET ITEM DO PROCESSO: 00001 ITEM DE MATERIAL: 000427092
+CONSUMO
+
+ 
+
+Fonte: Elaboragao do Autor, com base em recortes de imagens do Portal da Transparéncia do
+Governo Federal
+
+5.5. ACOMPANHAMENTO DE TENDENCIA DE PREGOS
+
+Outra possibilidade de aplicagaéo ¢ o acompanhamento de tendéncia dos precos de um
+determinado produto e possiveis comparacdes com os pre¢cos praticados pelo mercado nesse
+mesmo periodo, para poder se verificar se a Administracao Publica esta pagando valores
+condizentes com aqueles praticados pelo mercado.
+
+Na Figura 10 é apresentado um grafico (e a tabela que deu origem a esse grafico) com um
+
+comparativo entre os precos pagos pelo litro da gasolina pelo Governo Federal e 0 preco praticado
+pelo mercado® no mesmo periodo (de janeiro de 2018 a junho de 2019).
+Pela analise da Figura 10, pode-se concluir que o Governo Federal comprou combustivel
+com pre¢cos medianos compativeis com o valor pago pelo mercado, sendo que, na maioria dos
+meses ainda pagou um valor ligeiramente inferior. Poreém, mais uma vez, so foi possivel se fazer
+esse tipo de analise pelo fato dos produtos terem sido previamente identificados, visto que, a forma
+como os intes sao descritos nos empenhos nao permite esse tipo de analise automatizada, e o
+grande volume de dados impede uma analise manual.
+
+®* Os valores dos precos praticados pelo mercado para a gasolina foram obtidos no site da Agéncia Nacional do
+Petroleo (disponivel em http://www.anp.gov.br/precos-e-defesa/234-precos/levantamento-de-precos/8 68-seriehistorica-do-levantamento-de-precos-e-de-mar gens-de-comercializacao-de-combustiveis).
+
+26Figura 10 — Comparativo entre os precos da Gasolina comprada pelo Governo Federal e os
+valores de mercado
+
+Més | Governo Federal] Revenda Mercado
+
+Preco Gasolina 2018/2019
+
+i».O Oo o- on.*,
+
+set/17 dez/17 abr/18 jul/18 out/18 fev/19 mai/19 ago/19
+
+4>— Governo Federal Revenda Mercado
+
+ 
+
+Fonte: Elaboragao do Autor, com base em dados tratados do Portal da Transparéncia do Governo
+Federal e da Agéncia Nacional do Petroleo
+
+5.6. OUTRAS APLICACOES
+
+As aplicagdes apresentadas nessa secao sao apenas alguns exemplos de possiveis
+utilizagdes para a identificagao de produtos a partir da metodologia proposta nesse trabalho.
+Porém, existe uma série de outras aplicagdes possiveis, como por exemplo:
+
+e Aplicacao de regras de associagao para se identificar a probabilidade de um 6rgao comprar
+um determinado produto, dado que ele ja tenha comprado um conjunto de outros tipos de
+produtos;
+
+e A identificacgao dos oérgaos que compram com melhores precgos e aqueles que pagam mais
+caro pelos produtos
+
+e A verificagao se ha algum padrao de comportamento entre empresas fornecedoras de
+produtos que possa caracterizar algum tipo de conluio ou combinagao de pre¢os;
+
+e Identificagao das variacdes de precos praticados nas diferentes regides do pais, e etc.
+
+Os dados gerados durante 0 processamento sugerido também podem ser integrados com
+outras bases de dados (governamentais ou nao) a fim de se ampliar os tipos de analises a serem
+feitos.
+
+Logo, as possibilidades de aplicagdes dos resultados obtidos com os procedimentos
+propostos nesse artigo sao inumeras, ficando elas limitadas apenas pelas necessidades e
+criatividade dos analistas de dados que se propuserem a desenvolver estudos com tais informacoes.
+
+6. CONCLUSAO
+
+Essa pesquisa propde um método de descoberta de conhecimento em texto voltado para
+dados de descric¢oes textuais de compras apresentadas em portais de transparéncia. Tal método faz
+
+27a geracao de regras de identificagao de produtos por meio da aplicagaéo de um processo de
+mineracao de frases composta de quatro etapas: geracao de frases candidatas, filtragem de frases
+frequentes, poda de sub frases e geracao de regras. Sendo que, antes desse processo de mineracgao
+de texto propriamente dito, as descri¢des de compras passam por uma etapa de pré-processamento,
+que tem o objetivo de preparar o conyunto de dados textuais para o processo de minera¢ao de
+frases.
+
+O método proposto utiliza um processo de descoberta de conhecimento em texto que recebe
+como entrada um conjunto de descric6es textuais de compras, e oferece como saida um conjunto
+de regras de identificagao de produtos, utilizando trés parametros de referéncia: tamanhos minimos
+e maximo de frase e suporte minimo. Opcionalmente, dependendo da disponibilidade de pessoal,
+pode-se executar uma tarefa adicional, denominada refinamento de regras. Nessa atividade
+opcional, especialistas podem validar as regras geradas, bem como, adapta-las de acordo com os
+propositos desejados.
+
+A solucao proposta foi avaliada utilizando-se os dados de itens de empenho do Portal da
+Transparencia do Governo Federal, referentes ao periodo de um ano. Sendo que, durante a
+avaliacao verificou-se que a hipotese inicial, que dizia que se forem identificadas as sequéncias de
+tokens que mais se repetem em um determinado conjunto de descric¢ao de compras, entao, essas
+sequéncias de tokens caracterizarao os produtos mais comprados desse conjunto de descri¢oes, era
+verdadeira.
+
+Logo, a principal contribui¢ao dessa monografia foi a proposta de um método capaz de
+gerar regras de identifica¢ao de produtos a partir de descri¢des textuais de compras. Porém, outras
+contribuigdes intermediarias também resultaram dessa pesquisa, como a proposta de um algoritmo
+de geracao de frases, a proposta de um algoritmo de poda de sub frases e 0 desenvolvimento de
+uma metodologia de avaliacao dos resultados.
+
+A pesquisa em questao teve como limitacao a auséncia de um conyunto de dados com as
+descricdes das compras e a respectiva identifica¢gao dos produtos a que cada uma dessas descric6es
+se refere (auséncia de dados rotulados), o que dificultou a realizagao de uma avaliacao mais
+objetiva para a verificacao dos niveis de precisao atingidos pela técnica desenvolvida. A grande
+quantidade de registros que compoem a base de dados a ser analisada, torna inviavel a identifica¢ao
+de forma manual de um conjunto de dados amostral que seja numericamente significativo para a
+avaliacao dos resultados. Por outro lado, qualquer tentativa de se gerar um conjyunto de dados de
+teste de forma automatizada, o que resolveria o problema do grande volume de dados a ser
+analisado, poderia utilizar critérios tendenciosos, além do que, esses critérios de identificagao
+também poderiam identificar os produtos de forma errénea, 0 que distorceria os resultados da
+avalicao realizada.
+
+Por tais razOes, optou-se por proceder-se uma valida¢ao qualitativa dos resultados
+encontrados, conforme apresentado na Secao 4. Tal procedimento nao foi capaz de informar um
+valor exato sobre 0 grau de precisao atingido pela técnica proposta. Porém, foi capaz de indicar
+que a técnica se mostrou valida para os propositos para o qual foi concebida. Ainda, de acordo
+com os critérios estipulados para a selecao das amostras a serem analisadas qualitativamente, nao
+foram encontrados erros que pudesses refutar a validade da técnica proposta.
+
+Como trabalhos futuros, pretende-se aprimorar o método de minerac¢ao de texto proposto,
+e utilizar os resultados obtidos pela aplicagao da metodologia desenvolvida, a fim de se realizar
+novos estudos com os dados originarios dos processamentos realizados.
+
+Com relacao a possibilidade de melhoramentos do método proposto, pode-se incorporar o
+procedimento de clusteriza¢ao, utilizado na Secao 4 para avaliar a qualidade das regras, ao
+
+28processo de descoberta de conhecimento em dados textuais proposto, fazendo com que apenas as
+regras julgadas como boas (ou seja, aquelas cujo processo de clusteriza¢ao de seus registros nao
+gere um grande numero de clusters com registros espalhados por todos eles) seyjam consideradas
+na etapa de geracao de regras, melhorando-se assim a qualidade das regras geradas, e
+consequentemente, aprimorando-se os resultados do procedimento como um todo.
+
+Outro melhoramento que pode ser feito no processo de geracao de regras de identifica¢ao
+de itens de compras é a aplicacao de analise de similaridades entre os antecedentes das regras a
+serem geradas, a fim de se eliminar regras cujos antecedentes possuam similaridades superiores a
+um determinado valor (passado como parametro), quando comparada com outros antecedentes de
+regras geradas.
+
+O procedimento de mineracgao de frases apresentado nesse artigo também pode ser
+adaptado para ser utilizado em outros contextos. Por exemplo, esse procedimento pode ser ajustado
+para identificar as frases mais frequentes em um determinado conjunto de dados textuais, a fim de
+se levantar quais os topicos mais relevantes nesse corpus de texto. Tal atividade poderia ser
+utilizada em analises de textos publicados em redes sociais, blogs, jornais e etc.
+
+Quanto aos estudos que podem ser desenvolvidos a partir dos resultados obtidos pela
+aplicacao das técnicas aqui expostas, existem diversas possibilidades de pesquisas. O processo
+sugerido consegue obter dados estruturados a partir de um conjunto de dados textuais, ou seja, as
+descrigdes textuais de compras sao associadas a variaveis categoricas que especificam a que
+produtos cada uma dessas descric6es se refere.
+
+Dessa forma, pode-se utilizar essa nova variavel categorica (que identifica os produtos
+adquiridos) com os demais dados estruturados presentes nos bancos de dados dos portais de
+transparéncia, a fim de se aplicar técnicas de mineracao de dados para se extrair conhecimentos
+implicitos a respeito das atividades governamentais que sao apresentadas nos portais de
+transparéncia publica.
+
+REFERENCIAS
+
+BRASIL. (2009). Disponibilizag¢ao em tempo real de Informac¢oées. Recuperado abril 18, 2015, de
+https://www.planalto.gov.br/ccivil_03/leis/Icp/lcp131.htm
+
+Carvalho, R. N., Sales, L., Da Rocha, H. A., & Mendes, G. L. (2014a). Using Bayesian
+Networks to Identify and Prevent Split Purchases in Brazil. BMA@UAI 2014 (p. 70-78).
+
+Carvalho, R., Paiva, E. de, Rocha, H. da, & Mendes, G. (2013). Methodology for Creating the
+Brazilian Government Reference Price Database. X Encontro Nacional de Inteligéncia
+Artificial e Computacional, 2013, Fortaleza-CE. Recuperado de
+http://www.lbd.dcec.ufmg.br/colecoes/eniac/2013/0033.pdf
+
+Carvalho, R., Paiva, E. de, Rocha, H. da, & Mendes, G. (2014b). Using Clustering and Text
+Mining to Create a Reference Price Database. Learning and NonLinear Models, 12, 38-52.
+CGU, C.-G. (2013). MANUAL da Lei de Acesso a Informac¢ao para Estados e Municipios. la
+edicao. Brasilia: CGU, abr.
+
+29CORTES, C.; VAPNIK, V. Support-vector networks. Machine learning, v. 20, n. 3, p. 273-297,
+1995.
+
+Dean, J., & Ghemawat, S. (2008). MapReduce: simplified data processing on large clusters.
+Communications of the ACM, 51(1), 107-113.
+
+El-Kishky, A., Song, Y., Wang, C., Voss, C. R., & Han, J. (2014). Scalable topical phrase
+mining from text corpora. Proceedings of the VLDB Endowment, 8(3), 305-316.
+
+Friedman, N., Geiger, D., & Goldszmidt, M. (1997). Bayesian network classifiers. Machine
+learning, 29(2-3), 131-163.
+
+Hong, H. (2014). The Internet, transparency, and government—public relationships in Seoul,
+South Korea. Public Relations Review, 40(3), 500-502.
+
+Liu, J., Shang, J., Wang, C., Ren, X., & Han, J. (2015). Mining Quality Phrases from Massive
+Text Corpora. Proceedings of the 2015 ACM SIGMOD International Conference on
+Management of Data (p. 1729-1744). ACM.
+
+Liu, M., Chen, L., Liu, B., & Wang, X. (2015). VRCA: a clustering algorithm for massive
+amount of texts. Proceedings of the 24th International Conference on Artificial Intelligence (p.
+2355-2361). AAAI Press.
+
+Marzagao, T. (2015). Using SVM to pre-classify government purchases. arXiv preprint
+arXiv:1601.02680.
+
+Paiva, E., & Revoredo, K. (2016). Big Data e Transparéncia: Utilizando Fun¢oes de
+Mapreduce para incrementar a transparéncia dos Gastos Publicos. XII Simposio Brasileiro de
+Sistemas de Informagao, 2016, Florianopolis-SC.
+
+Ren, X., El-Kishky, A., Wang, C., Tao, F., Voss, C. R., & Han, J. (2015). Clustype: Effective
+entity recognition and typing by relation phrase-based clustering. Proceedings of the 21th ACM
+SIGKDD International Conference on Knowledge Discovery and Data Mining (p. 995—1004).
+ACM.
+
+Salton, G., Wong, A., & Yang, C.-S. (1975). A vector space model for automatic indexing.
+Communications of the ACM, 18(11), 613-620.
+
+White, T. (2012). Hadoop: The definitive guide. O’Reilly Media, Inc.
+
+Zaharia, M., Chowdhury, M., Franklin, M. J., Shenker, S., & Stoica, I. (2010). Spark: cluster
+computing with working sets. HotCloud, 10, 10—10.
+
+30
